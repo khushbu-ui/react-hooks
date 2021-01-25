@@ -1,4 +1,4 @@
-import React,{useState,useMemo,useReducer, useCallback} from 'react';
+import React,{useState,useMemo,useCallback} from 'react';
 
 function UseMemo(){
     const [wordIndex, setWordIndex] = useState(0)
@@ -13,7 +13,7 @@ function UseMemo(){
 
     const initialCandies = ['snickers', 'dairy milk', 'oreo', 'silk']
     const [candies, setCandies] = useState(initialCandies)
-    const dispense = React.useCallback(candy => {
+    const dispense = useCallback(candy => {
         setCandies(allCandies => allCandies.filter(c => c !== candy))
     })
 
