@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useContext} from 'react'
+import React,{useEffect,useState,useContext,useRef} from 'react'
 import { useDispatch, useSelector} from "react-redux";
 import { getUser} from "../action/Actions";
 
@@ -50,6 +50,7 @@ function Demo(){
         fetchData()
     },[])
 
+    // useEffect
     const loadData = async () => {
     const responce = await fetch(url)
     const data = await responce.json();
@@ -62,22 +63,37 @@ function Demo(){
     const dataFromReducer = useSelector((state)=>state.dataReducer)
     console.log('reducer',dataFromReducer)
 
+
     const fetchData = () => {
         dispatch(getUser());
     }
 
-
+    //useContext
     const value = useContext(detailsContext);
     console.log(value,'context')
+
+    //useRef
+    const [count,setCount] = useState(0)
+    const counter = useRef(null);
+
+    const incriment = () =>{
+        setCount(count + 1)
+    }
+    const decriment = () =>{
+        setCount(count - 1)
+    }
+
     return(
         <>
         <div style={{background:"lightcoral"}}>
         <h2>Demo</h2>
         </div>
           <div style={{backgroundColor:"lightcyan"}}>
+              <h2>useState</h2>
               <Todo todos={todo}/>
           </div>
             <div style={{marginRight:"20%", marginLeft:"30%"}}>
+                <h2>useEffect</h2>
                 {
                     list.map((item,index)=>{
                       return(
@@ -91,11 +107,13 @@ function Demo(){
                     })
                 }
             </div>
-            <div style={{marginRight:"150px"}}>
+            <div style={{marginRight:"10%", marginLeft:"20%"}}>
+
                 {
                     dataFromReducer.map((item,index)=>{
                         return(
-                            <div style={{float:"right", width:"40%", padding:"20px 10px"}}>
+                            <div style={{float:"left", width:"40%", padding:"10px 10px"}}>
+
                                 <div style={{boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",padding: "30px",textAlign: "center",backgroundColor:"coral"}}>
                                     <p>{item.employee_name}</p>
                                     <p>Salary : {item.employee_salary}</p>
@@ -106,6 +124,7 @@ function Demo(){
                 }
             </div>
             <div style={{marginRight:"20%", marginLeft:"30%"}}>
+                <h2>useContext</h2>
                 {
                     dataFromReducer.map((item,index)=>{
                         return(
@@ -120,6 +139,18 @@ function Demo(){
                     })
                 }
 
+            </div >
+            <div style={{marginRight:"20%", marginLeft:"43%"}}>
+
+                <div style={{float:"left", width:"40%", padding:"30px 10px"}}>
+                    <h2>useRef</h2>
+                    <div style={{boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",padding: "30px",textAlign: "center",backgroundColor:"lightcoral"}}>
+
+                <h1>Count : <span ref={counter}>{count}</span></h1>
+                <button onClick={incriment} style={{backgroundColor:"blueviolet" ,width:"30px",padding:"5px"}}>+</button>
+                <button onClick={decriment} style={{backgroundColor:"blueviolet" ,width:"30px",padding:"5px"}}>-</button>
+                    </div>
+                </div>
             </div>
 
 
