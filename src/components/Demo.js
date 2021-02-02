@@ -55,7 +55,6 @@ function Demo(){
     const responce = await fetch(url)
     const data = await responce.json();
     setList(data.data)
-        console.log('gfhjjj',data.data)
     }
 
     const dispatch = useDispatch();
