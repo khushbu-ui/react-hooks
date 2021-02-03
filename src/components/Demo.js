@@ -50,7 +50,7 @@ function Demo(){
         fetchData()
     },[])
 
-    // useEffect
+  
     const loadData = async () => {
     const responce = await fetch(url)
     const data = await responce.json();
